@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Feb 13 22:19:54 2018
+
+@author: sharleenprice
+"""
+
+seff_o=1.014
+a=8.177 *10**(-5)
+b=1.706*10**(-9)
+num = 5780
+
+def sign(a, b):
+    return a * b > 0
+
+def f(x):
+    funct=((((x/(num))**4)/((seff_o)+((a)*(x-num))+(b)*(x-num)**2))**(.5))-0.5
+    return funct
+
+#initial guesses
+x1=10
+x2=6000
+tol=0.0001
+
+
+def bisection(x1,x2,tol):
+    m=0
+    while abs(f(x2)-f(x1)) > tol:
+        m = (x1+x2)/2 # midpoint 
+        if f(m)==0  or (x2-x1)/2 <tol:
+            print(f(m))
+        if (sign(f(x1),f(m))):
+            x1 = m # recurse on right half 
+        else:
+            x2 = m # recurse on left half
+    return m
+
